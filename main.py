@@ -7,9 +7,15 @@ trainpaths, valpaths = get_train_val_split(paths)
 train_gen = RoadDataset(1, (256,256), trainpaths)
 val_gen = RoadDataset(1, (256,256), valpaths)
 
+checkpoint_file = "road_detection.h5"
+
 callbacks = [
-    keras.callbacks.ModelCheckpoint("road_detection.h5", save_best_only=True)
+    keras.callbacks.ModelCheckpoint(checkpoint_file, save_best_only=True)
 ]
 
-model = unet("road_detection.h5")
+if os.path.isfile(checkpoint_file):
+    model = unet(checkpoint_file)
+else:
+    model = unet()
+
 model.fit(train_gen,epochs=1,validation_data=val_gen,callbacks=callbacks)
