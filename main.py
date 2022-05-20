@@ -21,4 +21,4 @@ model.fit_generator(myGene,steps_per_epoch=300,epochs=1,callbacks=[model_checkpo
 
 testGene = testGenerator("data/data_road/testing")
 results = model.predict_generator(testGene,30,verbose=1)
-saveResult("data/data_road/testing",results)
+saveResult("data/data_road/testing/image_2",results)
