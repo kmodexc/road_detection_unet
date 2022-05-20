@@ -50,7 +50,7 @@ def unet(pretrained_weights = None,input_size = (256,256,3)):
 
     model.compile(
         optimizer = Adam(learning_rate = 1e-4), 
-        loss = SparseCategoricalCrossentropy(from_logits=True), 
+        loss = SparseCategoricalCrossentropy(), 
         metrics = ['accuracy'])
     
     #model.summary()
