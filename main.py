@@ -1,25 +1,15 @@
 from model import *
 from data import *
 
+paths = get_image_paths()
+trainpaths, valpaths = get_train_val_split(paths)
 
-#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+train_gen = RoadDataset(1, (256,256), trainpaths)
+val_gen = RoadDataset(1, (256,256), valpaths)
 
-
-
-data_gen_args = dict(rotation_range=0.2,
-                    width_shift_range=0.05,
-                    height_shift_range=0.05,
-                    shear_range=0.05,
-                    zoom_range=0.05,
-                    horizontal_flip=True,
-                    fill_mode='nearest')
-myGene = trainGenerator(2,'data/data_road/training','image_2','gt_image_2',data_gen_args,save_to_dir = None)
+callbacks = [
+    keras.callbacks.ModelCheckpoint("road_detection.h5", save_best_only=True)
+]
 
 model = unet()
-model_checkpoint = ModelCheckpoint('unet_membrane.hdf5', monitor='loss',verbose=1, save_best_only=True)
-model.fit_generator(myGene,steps_per_epoch=300,epochs=1,callbacks=[model_checkpoint])
-
-testGene = testGenerator("data/data_road/testing/image_2")
-results = model.predict_generator(testGene,30,verbose=1)
-os.mkdir("data/data_road/output")
-saveResult("data/data_road/output",results)
+model.fit(train_gen,epochs=1,validation_data=val_gen,callbacks=callbacks)
