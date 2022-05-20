@@ -8,6 +8,7 @@ import skimage.io as io
 import skimage.transform as trans
 import numpy as np
 from tensorflow.keras.preprocessing.image import load_img
+import tensorflow.keras as keras
 import random
 from PIL import Image
 
