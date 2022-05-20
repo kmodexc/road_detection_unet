@@ -1,8 +1,11 @@
-import tensorflow.keras as keras
+from tensorflow.keras.models import *
+from tensorflow.keras.layers import *
+from tensorflow.keras.optimizers import * 
+from tensorflow.keras.losses import *
 from keras.models import *
 from keras.layers import *
-from keras.optimizers import Adam 
-from keras.losses import BinaryCrossentropy
+from keras.optimizers import * 
+from keras.losses import *
 
 
 def unet(pretrained_weights = None,input_size = (256,256,3)):

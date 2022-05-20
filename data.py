@@ -1,10 +1,9 @@
 from __future__ import print_function
-import tensorflow.keras as keras
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import load_img
+from keras.preprocessing.image import load_img
 import numpy as np 
 import os
 import numpy as np
-from keras.preprocessing.image import load_img
 import keras as keras
 import random
 
