@@ -2,11 +2,9 @@ from __future__ import print_function
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.utils import Sequence
 from keras.preprocessing.image import load_img
-from keras.utils import Sequence
 import numpy as np 
 import os
 import numpy as np
-import keras as keras
 import random
 
 Nothing = [255,0,0]
