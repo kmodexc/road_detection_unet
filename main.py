@@ -1,3 +1,5 @@
+from tensorflow.keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint
 from model import *
 from data import *
 
@@ -10,7 +12,7 @@ val_gen = RoadDataset(1, (256,256), valpaths)
 checkpoint_file = "road_detection.h5"
 
 callbacks = [
-    keras.callbacks.ModelCheckpoint(checkpoint_file, save_best_only=True)
+    ModelCheckpoint(checkpoint_file, save_best_only=True)
 ]
 
 if os.path.isfile(checkpoint_file):
