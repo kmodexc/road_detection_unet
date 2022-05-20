@@ -1,7 +1,7 @@
 from tensorflow.keras.models import *
 from tensorflow.keras.layers import *
 from tensorflow.keras.optimizers import Adam 
-from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
 
 
 def unet(pretrained_weights = None,input_size = (256,256,3)):
@@ -50,7 +50,7 @@ def unet(pretrained_weights = None,input_size = (256,256,3)):
 
     model.compile(
         optimizer = Adam(learning_rate = 1e-4), 
-        loss = tensorflow.keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
+        loss = SparseCategoricalCrossentropy(from_logits=True), 
         metrics = ['accuracy'])
     
     #model.summary()
