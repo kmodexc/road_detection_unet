@@ -1,10 +1,10 @@
 from __future__ import print_function
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import ImageDataGenerator
 import numpy as np 
 import os
 import numpy as np
-from tensorflow.keras.preprocessing.image import load_img
-import tensorflow.keras as keras
+from keras.preprocessing.image import load_img
+import keras as keras
 import random
 
 Nothing = [255,0,0]
