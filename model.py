@@ -48,7 +48,10 @@ def unet(pretrained_weights = None,input_size = (256,256,3)):
 
     model = Model(inputs = inputs, outputs = conv10)
 
-    model.compile(optimizer = Adam(learning_rate = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'], run_eagerly=True)
+    model.compile(
+        optimizer = Adam(learning_rate = 1e-4), 
+        loss = tensorflow.keras.losses.SparseCategoricalCrossentropy(from_logits=True), 
+        metrics = ['accuracy'])
     
     #model.summary()
 

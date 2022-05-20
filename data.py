@@ -1,16 +1,11 @@
 from __future__ import print_function
-from pandas import array
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np 
 import os
-import glob
-import skimage.io as io
-import skimage.transform as trans
 import numpy as np
 from tensorflow.keras.preprocessing.image import load_img
 import tensorflow.keras as keras
 import random
-from PIL import Image
 
 Nothing = [255,0,0]
 Road = [255,0,255]
