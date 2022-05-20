@@ -11,5 +11,5 @@ callbacks = [
     keras.callbacks.ModelCheckpoint("road_detection.h5", save_best_only=True)
 ]
 
-model = unet()
+model = unet("road_detection.h5")
 model.fit(train_gen,epochs=1,validation_data=val_gen,callbacks=callbacks)
