@@ -1,6 +1,8 @@
 from __future__ import print_function
 from tensorflow.keras.preprocessing.image import load_img
+from tensorflow.keras.utils import Sequence
 from keras.preprocessing.image import load_img
+from keras.utils import Sequence
 import numpy as np 
 import os
 import numpy as np
@@ -24,7 +26,7 @@ def adjustLabel(img):
                 outimage[x,y] = [0.0]
     return outimage
 
-class RoadDataset(keras.utils.Sequence):
+class RoadDataset(Sequence):
     """Helper to iterate over the data (as Numpy arrays)."""
 
     def __init__(self, batch_size, img_size, img_paths):
