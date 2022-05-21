@@ -2,3 +2,5 @@ env/
 data/
 img/
 __pycache__
+*.png
+*.h5

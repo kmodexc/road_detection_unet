@@ -6,7 +6,7 @@ from data import *
 paths = get_image_paths()
 trainpaths, valpaths = get_train_val_split(paths)
 
-train_gen = RoadDataset(1, (256,256), trainpaths)
+train_gen = RoadDataset(2, (256,256), trainpaths)
 val_gen = RoadDataset(1, (256,256), valpaths)
 
 checkpoint_file = "road_detection.h5"
@@ -21,3 +21,9 @@ else:
     model = unet()
 
 model.fit(train_gen,epochs=1,validation_data=val_gen,callbacks=callbacks)
+
+save_gs_img(train_gen[0][1][0],"label.png")
+
+pdim = model.predict(train_gen[0][0])
+
+save_gs_img(pdim[0],"output.png")

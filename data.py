@@ -1,11 +1,11 @@
 from __future__ import print_function
-from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.utils import Sequence
-from keras.preprocessing.image import load_img
+from tensorflow.keras.utils import load_img
 import numpy as np 
 import os
 import numpy as np
 import random
+from PIL import Image
 
 Nothing = [255,0,0]
 Road = [255,0,255]
@@ -89,3 +89,13 @@ def get_train_val_split(paths):
     val_target_img_paths = lab_p[-val_samples:]
     return zip(train_input_img_paths,train_target_img_paths), zip(val_input_img_paths,val_target_img_paths)
 
+
+def save_gs_img(data,path):
+    assert data.shape == (256,256,1)
+    assert data.max() <= 1.0
+    assert data.min() >= 0.0
+    conv_arr = np.array([[p[0]*255 for p in row] for row in data],dtype=np.uint8)
+    assert conv_arr.shape == (256,256)
+    im = Image.fromarray(conv_arr)
+    im = im.convert('RGB')
+    im.save(path)
