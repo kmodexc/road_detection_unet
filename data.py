@@ -79,7 +79,7 @@ def get_image_paths(_type='training'):
 def get_train_val_split(paths):
     # Split our img paths into a training and a validation set
     paths = list(paths)
-    val_samples = 20
+    val_samples = int(len(paths)/10)
     random.Random(1337).shuffle(paths)
     inp_p = [x[0] for x in paths]
     lab_p = [x[1] for x in paths]
@@ -98,4 +98,20 @@ def save_gs_img(data,path):
     assert conv_arr.shape == (256,256)
     im = Image.fromarray(conv_arr)
     im = im.convert('RGB')
+    im.save(path)
+
+def save_rgb_img(data,path):
+    assert data.shape == (256,256,3)
+    im = Image.fromarray(data.astype(np.uint8))
+    im.save(path)
+
+def cut_rgb_img(data,mask,path):
+    assert data.shape == (256,256,3)
+    assert mask.shape == (256,256,1)
+    outimage = np.zeros_like(data)
+    for x in range(256):
+        for y in range(256):
+            if mask[x,y] > 0.5:
+                outimage[x,y] = data[x,y]
+    im = Image.fromarray(outimage.astype(np.uint8))
     im.save(path)

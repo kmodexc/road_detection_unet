@@ -2,10 +2,12 @@ from tensorflow.keras.models import *
 from tensorflow.keras.layers import *
 from tensorflow.keras.optimizers import * 
 from tensorflow.keras.losses import *
+from tensorflow.keras.metrics import *
 from keras.models import *
 from keras.layers import *
 from keras.optimizers import * 
 from keras.losses import *
+from keras.metrics import *
 
 def unet(pretrained_weights = None,input_size = (256,256,3)):
     inputs = Input(input_size)
@@ -65,9 +67,9 @@ def unet(pretrained_weights = None,input_size = (256,256,3)):
     model = Model(inputs = inputs, outputs = conv10)
 
     model.compile(
-        optimizer = Adam(learning_rate = 1e-8), 
+        optimizer = Adam(learning_rate = 1e-5), 
         loss = BinaryCrossentropy(), 
-        metrics = ['accuracy'])
+        metrics = [MeanIoU(2)])
     
     #model.summary()
 
