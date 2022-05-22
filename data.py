@@ -90,7 +90,7 @@ def get_train_val_split(paths):
     return zip(train_input_img_paths,train_target_img_paths), zip(val_input_img_paths,val_target_img_paths)
 
 
-def save_gs_img(data,path):
+def save_gs_img(data,path=None):
     assert data.shape == (256,256,1)
     assert data.max() <= 1.0
     assert data.min() >= 0.0
@@ -98,14 +98,20 @@ def save_gs_img(data,path):
     assert conv_arr.shape == (256,256)
     im = Image.fromarray(conv_arr)
     im = im.convert('RGB')
-    im.save(path)
+    if path is None:
+        im.show()
+    else:
+        im.save(path)
 
-def save_rgb_img(data,path):
+def save_rgb_img(data,path=None):
     assert data.shape == (256,256,3)
     im = Image.fromarray(data.astype(np.uint8))
-    im.save(path)
+    if path is None:
+        im.show()
+    else:
+        im.save(path)
 
-def cut_rgb_img(data,mask,path):
+def cut_rgb_img(data,mask,path=None):
     assert data.shape == (256,256,3)
     assert mask.shape == (256,256,1)
     outimage = np.zeros_like(data)
@@ -114,4 +120,7 @@ def cut_rgb_img(data,mask,path):
             if mask[x,y] > 0.5:
                 outimage[x,y] = data[x,y]
     im = Image.fromarray(outimage.astype(np.uint8))
-    im.save(path)
+    if path is None:
+        im.show()
+    else:
+        im.save(path)
