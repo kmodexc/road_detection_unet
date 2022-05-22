@@ -79,7 +79,7 @@ def get_image_paths(_type='training'):
 def get_train_val_split(paths):
     # Split our img paths into a training and a validation set
     paths = list(paths)
-    val_samples = int(len(paths)/10)
+    val_samples = 20#int(len(paths)/10)
     random.Random(1337).shuffle(paths)
     inp_p = [x[0] for x in paths]
     lab_p = [x[1] for x in paths]

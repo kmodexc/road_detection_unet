@@ -15,9 +15,11 @@ if os.path.isfile(checkpoint_file):
 else:
     model = unet()
 
-imind = 10
-save_rgb_img(train_gen[imind][0][0],"input.png")
-save_gs_img(train_gen[imind][1][0],"label.png")
-pdim = model.predict(train_gen[imind][0])
-save_gs_img(pdim[0],"output.png")
-cut_rgb_img(train_gen[imind][0][0],pdim[0],"masked_imput.png")
+print("start")
+for imind in range(50):
+    save_rgb_img(train_gen[imind][0][0],"input.png")
+    save_gs_img(train_gen[imind][1][0],"label.png")
+    pdim = model.predict(train_gen[imind][0])
+    save_gs_img(pdim[0],"output.png")
+    cut_rgb_img(train_gen[imind][0][0],pdim[0],"masked_imput.png")
+    print(imind)
