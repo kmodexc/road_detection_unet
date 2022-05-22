@@ -5,10 +5,6 @@ from keras.callbacks import ModelCheckpoint
 
 paths = get_image_paths()
 
-callbacks = [
-    ModelCheckpoint("road_detection.h5", save_best_only=True)
-]
-
 train_gen = RoadDataset(1,(256,256),paths)
 
 checkpoint_file = "road_detection.h5"
