@@ -1,25 +1,14 @@
+import sys
 from model import *
 from data import *
-from tensorflow.keras.callbacks import ModelCheckpoint
-from keras.callbacks import ModelCheckpoint
 
-paths = get_image_paths()
+train_gen, val_gen = get_ds_combined()
 
-train_gen = RoadDataset(1,(256,256),paths)
+checkpoint_file = "road_unet_v3.h5"
+model = unet(checkpoint_file)
 
-checkpoint_file = "road_detection.h5"
+print("avg=",eval(model,val_gen,n=50))
 
-if os.path.isfile(checkpoint_file):
-    print("Load from checkpoint")
-    model = unet(checkpoint_file)
-else:
-    model = unet()
+predict_and_save(model,train_gen,6)
 
-print("start")
-for imind in range(50):
-    save_rgb_img(train_gen[imind][0][0],"input.png")
-    save_gs_img(train_gen[imind][1][0],"label.png")
-    pdim = model.predict(train_gen[imind][0])
-    save_gs_img(pdim[0],"output.png")
-    cut_rgb_img(train_gen[imind][0][0],pdim[0],"masked_imput.png")
-    print(imind)
+#model.save("export")

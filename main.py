@@ -3,21 +3,11 @@ from keras.callbacks import ModelCheckpoint
 from model import *
 from data import *
 
-paths = get_image_paths()
-trainpaths, valpaths = get_train_val_split(paths)
+train_gen, val_gen = get_ds_city()
 
-train_gen = RoadDataset(1, (256,256), trainpaths)
-val_gen = RoadDataset(1, (256,256), valpaths)
+checkpoint_file = "road_unet_v3.h5"
 
-checkpoint_file = None
+model = unet(checkpoint_file)
 
-callbacks = [
-    ModelCheckpoint(checkpoint_file, save_best_only=True)
-]
-
-if checkpoint_file is not None and os.path.isfile(checkpoint_file):
-    model = unet(checkpoint_file)
-else:
-    model = unet()
-
-model.fit(train_gen,epochs=20,validation_data=val_gen,callbacks=callbacks)
+callbacks = [ModelCheckpoint(checkpoint_file ,save_best_only=True)]
+model.fit(train_gen,epochs=50,validation_data=val_gen,callbacks=callbacks)

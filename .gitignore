@@ -4,3 +4,6 @@ img/
 __pycache__
 *.png
 *.h5
+dlmodel/
+export/
+tensorrt/
