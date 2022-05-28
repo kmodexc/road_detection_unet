@@ -9,6 +9,7 @@ import numpy as np
 import random
 from PIL import Image
 import cv2 as cv
+import time
 
 CERTANTY = 0.7
 
@@ -231,7 +232,10 @@ def eval(model,dataset,n = 20):
     avg = 0
     rv = int(random.random()*len(dataset))
     for i in range(n):
-        pdim = model.predict(dataset[(rv+i) % len(dataset)][0])
+        input = dataset[(rv+i) % len(dataset)][0]
+        start = time.time()
+        pdim = model.predict(input)
+        print("dt",time.time()-start)
         avg += get_miou(pdim[0],dataset[(rv+i) % len(dataset)][1][0])
     return avg/n
 

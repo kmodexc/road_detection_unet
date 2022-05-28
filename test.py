@@ -1,4 +1,3 @@
-import sys
 from model import *
 from data import *
 
@@ -10,5 +9,3 @@ model = unet(checkpoint_file)
 print("avg=",eval(model,val_gen,n=50))
 
 predict_and_save(model,train_gen,6)
-
-#model.save("export")

@@ -1,5 +1,6 @@
 env/
 data/
+data
 img/
 __pycache__
 *.png
