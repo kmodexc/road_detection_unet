@@ -7,3 +7,4 @@ __pycache__
 dlmodel/
 export/
 tensorrt/
+venv/
