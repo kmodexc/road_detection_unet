@@ -2,3 +2,4 @@ tensorflow
 scikit-image
 Pillow
 keras
+opencv-python
